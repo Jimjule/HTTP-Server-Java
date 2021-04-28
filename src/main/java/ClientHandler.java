@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
@@ -11,17 +12,25 @@ public class ClientHandler extends Thread {
     }
 
     public void run() {
-        System.out.println("Client Connected.");
         try {
             out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            out.println("Welcome");
-            String input;
-            while ((input = in.readLine()) != null) {
-                if(input != ".") {
-                    out.println("Hey.");
-                }
+
+            String line;
+            ArrayList<String> input = new ArrayList<>();
+
+            while ((line = in.readLine()) != null && line.length() != 0) {
+                input.add(line);
             }
+
+            String parameters = RequestReader.requestHandler(input);
+            String parametersMethod = RequestReader.findRequestMethod(parameters);
+            String parametersPath = RequestReader.findRequestAddress(parameters);
+
+            String response = ResponseBuilder.responseHandler(parametersMethod,  parametersPath);
+            out.println(response);
+
+            clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
