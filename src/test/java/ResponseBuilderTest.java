@@ -12,6 +12,14 @@ class ResponseBuilderTest {
     }
 
     @Test
+    public void returnsOKWithBody() {
+        String method = "GET";
+        String path = "/simple_get_with_body";
+        String response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello world";
+        assertEquals(response, ResponseBuilder.responseHandler(method, path));
+    }
+
+    @Test
     public void returns404ForNoSuchGETPath() {
         String method = "GET";
         String path = "/over_the_rainbow";
