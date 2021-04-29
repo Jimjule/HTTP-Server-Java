@@ -27,8 +27,8 @@ public class ClientHandler extends Thread {
             String parametersMethod = RequestReader.findRequestMethod(parameters);
             String parametersPath = RequestReader.findRequestAddress(parameters);
 
-            String response = ResponseBuilder.responseHandler(parametersMethod,  parametersPath);
-            out.println(response);
+            Response response = ResponseBuilder.responseHandler(parametersMethod,  parametersPath);
+            out.println(response.print());
 
             clientSocket.close();
         } catch (IOException e) {

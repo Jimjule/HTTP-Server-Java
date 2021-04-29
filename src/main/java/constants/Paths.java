@@ -6,7 +6,8 @@ public enum Paths {
     METHOD_OPTIONS2("/method_options2"),
     REDIRECT("/redirect"),
     SIMPLE_GET("/simple_get"),
-    SIMPLE_GET_WITH_BODY("/simple_get_with_body");
+    SIMPLE_GET_WITH_BODY("/simple_get_with_body"),
+    HEALTH_CHECK("/health_check.html");
 
     private final String path;
 
