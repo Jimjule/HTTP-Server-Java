@@ -9,7 +9,7 @@ import java.util.List;
 public class MethodOptions2Route implements Route {
     private static final String body = null;
     private static final ArrayList<String> headers = new ArrayList<>();
-    private static final List<String> allow = Arrays.asList("GET", "HEAD", "OPTIONS, PUT, POST");
+    private static final List<String> allow = Arrays.asList("GET", "HEAD", "OPTIONS", "PUT", "POST");
 
     public String getBody() {
         return body;
@@ -17,17 +17,22 @@ public class MethodOptions2Route implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(getAllow());
+        headers.add(formatAllow());
         return headers;
     }
 
     @Override
-    public String getAllow() {
+    public String formatAllow() {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
     }
 
     public void getContentType() {
+    }
+
+    @Override
+    public List<String> getAllow() {
+        return allow;
     }
 }

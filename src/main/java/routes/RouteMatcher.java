@@ -1,8 +1,6 @@
 package routes;
 
 public class RouteMatcher {
-//    HEAD_REQUEST("/head_request"),
-
     public static Route getRoute(String path) {
         Route route = null;
         try {
@@ -31,12 +29,9 @@ public class RouteMatcher {
                 default:
                     break;
             }
-
         } catch (NullPointerException ignore) {
             return null;
         }
         return route;
     }
-
-
 }

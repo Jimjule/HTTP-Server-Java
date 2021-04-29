@@ -7,7 +7,7 @@ class ResponseBuilderTest {
     public void returnsOKForExistingGETPath() {
         String method = "GET";
         String path = "/simple_get";
-        String expectedResponse = "HTTP/1.1 200 OK\r\n";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD\r\n";
         Response response = ResponseBuilder.responseHandler(method, path);
         assertEquals(expectedResponse, response.print());
     }
@@ -44,6 +44,15 @@ class ResponseBuilderTest {
         String method = "OPTIONS";
         String path = "/method_options";
         String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS\r\n";
+        Response response = ResponseBuilder.responseHandler(method, path);
+        assertEquals(expectedResponse, response.print());
+    }
+
+    @Test
+    public void returnsMoreMethodOptions() {
+        String method = "OPTIONS";
+        String path = "/method_options2";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\n";
         Response response = ResponseBuilder.responseHandler(method, path);
         assertEquals(expectedResponse, response.print());
     }

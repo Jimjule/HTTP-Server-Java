@@ -18,17 +18,22 @@ public class HealthCheckRoute implements Route {
     @Override
     public ArrayList<String> getHeaders() {
         headers.add(Headers.CONTENT_TYPE_HTML.getHeader());
-        headers.add(getAllow());
+        headers.add(formatAllow());
         return headers;
     }
 
     @Override
-    public String getAllow() {
+    public String formatAllow() {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
     }
 
     public void getContentType() {
+    }
+
+    @Override
+    public List<String> getAllow() {
+        return allow;
     }
 }

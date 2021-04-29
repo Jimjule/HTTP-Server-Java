@@ -18,15 +18,20 @@ public class HeadRequest implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(getAllow());
+        headers.add(formatAllow());
         return headers;
     }
 
     @Override
-    public String getAllow() {
+    public String formatAllow() {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
+    }
+
+    @Override
+    public List<String> getAllow() {
+        return allow;
     }
 
     @Override
