@@ -1,44 +1,59 @@
 import constants.Codes;
 import constants.Paths;
+import routes.*;
 
 public class ResponseBuilder {
     public static Response responseHandler(String method, String path) {
-        String CONTENT_TYPE_TEXT_PLAIN = "Content-Type: text/plain";
-        String CONTENT_TYPE_TEXT_HTML = "Content-Type: text/html";
-        String ALLOW_GET_HEAD_OPTIONS_PUT_POST = "Allow: GET, HEAD, OPTIONS, PUT, POST";
-        String ALLOW_GET_HEAD_OPTIONS = "Allow: GET, HEAD, OPTIONS";
         String ALLOW_HEAD_OPTIONS = "Allow: HEAD, OPTIONS";
 
         String requestRoute = getRequestRoute(path);
         String responseCode = getResponseCode(requestRoute);
 
+        Route route = RouteMatcher.getRoute(requestRoute);
+
         Response response = new Response();
+
+        if (route == null) {
+            response.setParams(Codes._404.getCode());
+            return response;
+        }
 
         if(method.equals("GET") && path.equals("/simple_get_with_body")) {
             response.setParams(responseCode);
-            response.setHeaders(CONTENT_TYPE_TEXT_PLAIN);
-            response.setBody("Hello world");
+            for (String header: route.getHeaders()) {
+                response.setHeaders(header);
+            }
+            response.setBody(route.getBody());
 
         } else if (method.equals("GET") && path.equals("/head_request")) {
-            response.setParams("405 Method Not Allowed");
+            response.setParams(responseCode);
+            response.setParams(Codes._405.getCode());
             response.setHeaders(ALLOW_HEAD_OPTIONS);
 
         } else if (responseCode.equals(Codes._301.getCode())) {
             response.setParams(responseCode);
-            response.setHeaders("Location: http://127.0.0.1:5000/simple_get");
+            for (String header: route.getHeaders()) {
+                response.setHeaders(header);
+            }
 
         } else if (method.equals("OPTIONS") && path.equals("/method_options")) {
             response.setParams(responseCode);
-            response.setHeaders(ALLOW_GET_HEAD_OPTIONS);
+            for (String header: route.getHeaders()) {
+                response.setHeaders(header);
+            }
 
         } else if (method.equals("OPTIONS") && path.equals("/method_options2")) {
             response.setParams(responseCode);
-            response.setHeaders(ALLOW_GET_HEAD_OPTIONS_PUT_POST);
+            for (String header: route.getHeaders()) {
+                response.setHeaders(header);
+            }
 
         } else if (method.equals("GET") && path.equals("/health_check.html")) {
             response.setParams(responseCode);
-            response.setHeaders(CONTENT_TYPE_TEXT_HTML);
-            response.setBody("<html><body><h1>Status: Passing</h1></body></html>");
+            for (String header: route.getHeaders()) {
+                response.setHeaders(header);
+            }
+            response.setBody(new HealthCheckRoute().getBody());
         } else {
             response.setParams(responseCode);
         }
