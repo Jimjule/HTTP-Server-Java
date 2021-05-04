@@ -2,7 +2,7 @@ import constants.Codes;
 import routes.*;
 
 public class ResponseBuilder {
-    public static Response responseHandler(String method, String path) {
+    public static Response responseHandler(String method, String path, String body) {
 
         Route route = RouteMatcher.getRoute(path);
         Response response = new Response();
@@ -14,7 +14,11 @@ public class ResponseBuilder {
         for (String header: route.getHeaders()) {
             response.setHeaders(header);
         }
-        response.setBody(route.getBody());
+        if (path.equals("/echo_body")) {
+            response.setBody(body);
+        } else {
+            response.setBody(route.getBody());
+        }
 
         return response;
     }

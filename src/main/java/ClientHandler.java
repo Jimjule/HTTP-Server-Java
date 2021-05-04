@@ -1,11 +1,11 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
-    private BufferedReader in;
+    private InputStream in;
     private PrintWriter out;
+    StringBuilder stringBuilder = new StringBuilder();
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -14,25 +14,28 @@ public class ClientHandler extends Thread {
     public void run() {
         try {
             out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            in = clientSocket.getInputStream();
 
-            String line;
-            ArrayList<String> input = new ArrayList<>();
-
-            while ((line = in.readLine()) != null && line.length() != 0) {
-                input.add(line);
-            }
-
-            String parameters = RequestReader.requestHandler(input);
+            String request = getRequest();
+            String parameters = RequestReader.requestHandler(request);
             String parametersMethod = RequestReader.findRequestMethod(parameters);
             String parametersPath = RequestReader.findRequestAddress(parameters);
+            String body = RequestReader.getBody(request);
 
-            Response response = ResponseBuilder.responseHandler(parametersMethod,  parametersPath);
+            Response response = ResponseBuilder.responseHandler(parametersMethod, parametersPath, body);
             out.println(response.print());
 
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getRequest() throws IOException {
+        while (in.available() != 0) {
+            stringBuilder.append((char) in.read());
+        }
+
+        return stringBuilder.toString();
     }
 }
