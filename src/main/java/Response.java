@@ -22,7 +22,9 @@ public class Response {
     }
 
     public void setBody(String body) {
-        this.body += CRLF + body;
+        if (body != null) {
+            this.body += CRLF + body;
+        }
     }
 
     public String print() {
