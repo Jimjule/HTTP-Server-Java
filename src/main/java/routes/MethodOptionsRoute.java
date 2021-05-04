@@ -28,6 +28,7 @@ public class MethodOptionsRoute implements Route {
         return allowHeader;
     }
 
+    @Override
     public void getContentType() {
     }
 

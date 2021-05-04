@@ -29,6 +29,7 @@ public class HealthCheckRoute implements Route {
         return allowHeader;
     }
 
+    @Override
     public void getContentType() {
     }
 

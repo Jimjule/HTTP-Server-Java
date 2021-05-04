@@ -1,6 +1,3 @@
-import constants.Codes;
-import constants.Paths;
-
 public class Response {
 
     private String params;

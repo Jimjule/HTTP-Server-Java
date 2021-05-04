@@ -28,6 +28,7 @@ public class SimpleGetRoute implements Route {
         return allowHeader;
     }
 
+    @Override
     public void getContentType() {
     }
 

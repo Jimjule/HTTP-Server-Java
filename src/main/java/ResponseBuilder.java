@@ -1,12 +1,10 @@
 import constants.Codes;
-import constants.Paths;
 import routes.*;
 
 public class ResponseBuilder {
     public static Response responseHandler(String method, String path) {
-        String requestRoute = getRequestRoute(path);
 
-        Route route = RouteMatcher.getRoute(requestRoute);
+        Route route = RouteMatcher.getRoute(path);
         Response response = new Response();
 
         if (route == null) {
@@ -34,15 +32,5 @@ public class ResponseBuilder {
         response.setBody(route.getBody());
 
         return response;
-    }
-
-    private static String getRequestRoute(String path) {
-        String requestRoute = null;
-        for (Paths route : Paths.values()) {
-            if (route.getPath().equals(path)) {
-                requestRoute = route.getPath();
-            }
-        }
-        return requestRoute;
     }
 }

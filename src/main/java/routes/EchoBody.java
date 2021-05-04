@@ -6,12 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RedirectRoute implements Route {
-    private static final String body = null;
+public class EchoBody implements Route {
+    private static final String body = "some body";
     private static final ArrayList<String> headers = new ArrayList<>();
-    private static final List<String> allow = Arrays.asList("GET", "HEAD");
-
-    private static final String redirect = "http://127.0.0.1:5000/simple_get";
+    private static final List<String> allow = Arrays.asList("POST", "HEAD");
 
     public String getBody() {
         return body;
@@ -19,7 +17,7 @@ public class RedirectRoute implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.LOCATION.getHeader() + redirect);
+        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
         headers.add(formatAllow());
         return headers;
     }
