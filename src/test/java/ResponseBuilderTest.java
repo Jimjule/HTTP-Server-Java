@@ -65,4 +65,13 @@ class ResponseBuilderTest {
         Response response = ResponseBuilder.responseHandler(method, path);
         assertEquals(expectedResponse, response.print());
     }
+
+    @Test
+    public void returnsEchoForPost() {
+        String method = "POST";
+        String path = "/echo_body";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nAllow: POST, HEAD\r\n\r\nsome body";
+        Response response = ResponseBuilder.responseHandler(method, path);
+        assertEquals(expectedResponse, response.print());
+    }
 }

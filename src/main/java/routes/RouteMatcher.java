@@ -5,6 +5,9 @@ public class RouteMatcher {
         Route route = null;
         try {
             switch (path) {
+                case "/echo_body":
+                    route = new EchoBody();
+                    break;
                 case "/head_request":
                     route = new HeadRequest();
                     break;

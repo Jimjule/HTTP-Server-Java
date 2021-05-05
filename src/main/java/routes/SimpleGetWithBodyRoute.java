@@ -29,6 +29,7 @@ public class SimpleGetWithBodyRoute implements Route {
         return allowHeader;
     }
 
+    @Override
     public void getContentType() {
     }
 
