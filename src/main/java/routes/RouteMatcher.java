@@ -29,6 +29,8 @@ public class RouteMatcher {
                 case "/simple_get_with_body":
                     route = new SimpleGetWithBodyRoute();
                     break;
+                case "/text_response":
+                    route = new TextResponse();
                 default:
                     break;
             }
