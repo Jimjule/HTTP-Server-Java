@@ -37,6 +37,10 @@ public class RouteMatcher {
                     break;
                 case "/text_response":
                     route = new TextResponse();
+                    break;
+                case "/xml_response":
+                    route = new XMLResponse();
+                    break;
                 default:
                     break;
             }
