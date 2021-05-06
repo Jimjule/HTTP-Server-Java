@@ -17,6 +17,9 @@ public class RouteMatcher {
                 case "/html_response":
                     route = new HTMLResponse();
                     break;
+                case "/json_response":
+                    route = new JSONResponse();
+                    break;
                 case "/method_options":
                     route = new MethodOptionsRoute();
                     break;
