@@ -14,6 +14,12 @@ public class RouteMatcher {
                 case "/health_check.html":
                     route = new HealthCheckRoute();
                     break;
+                case "/html_response":
+                    route = new HTMLResponse();
+                    break;
+                case "/json_response":
+                    route = new JSONResponse();
+                    break;
                 case "/method_options":
                     route = new MethodOptionsRoute();
                     break;
@@ -28,6 +34,12 @@ public class RouteMatcher {
                     break;
                 case "/simple_get_with_body":
                     route = new SimpleGetWithBodyRoute();
+                    break;
+                case "/text_response":
+                    route = new TextResponse();
+                    break;
+                case "/xml_response":
+                    route = new XMLResponse();
                     break;
                 default:
                     break;

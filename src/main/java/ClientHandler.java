@@ -27,7 +27,6 @@ public class ClientHandler extends Thread {
 
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            System.out.println(response.print());
             out.printf(response.print());
 
             clientSocket.close();
