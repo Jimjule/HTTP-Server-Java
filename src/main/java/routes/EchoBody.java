@@ -7,12 +7,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EchoBody implements Route {
-    private static final String body = "some body";
-    private static final ArrayList<String> headers = new ArrayList<>();
+    private static String body = null;
+    private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("POST", "HEAD");
 
     public String getBody() {
         return body;
+    }
+
+    public void setBody(String newBody) {
+        body = newBody;
     }
 
     @Override

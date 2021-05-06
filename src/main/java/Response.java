@@ -21,6 +21,8 @@ public class Response {
     public void setBody(String body) {
         if (body != null) {
             this.body += CRLF + body;
+        } else {
+            this.body += CRLF;
         }
     }
 

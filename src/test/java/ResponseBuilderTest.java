@@ -7,8 +7,9 @@ class ResponseBuilderTest {
     public void returnsOKForExistingGETPath() {
         String method = "GET";
         String path = "/simple_get";
-        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -17,7 +18,8 @@ class ResponseBuilderTest {
         String method = "GET";
         String path = "/simple_get_with_body";
         String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nAllow: GET, HEAD\r\n\r\nHello world";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -25,8 +27,9 @@ class ResponseBuilderTest {
     public void returns404ForNoSuchGETPath() {
         String method = "GET";
         String path = "/over_the_rainbow";
-        String expectedResponse = "HTTP/1.1 404 Not Found\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 404 Not Found\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -34,8 +37,9 @@ class ResponseBuilderTest {
     public void returns301ForRedirect() {
         String method = "GET";
         String path = "/redirect";
-        String expectedResponse = "HTTP/1.1 301 Redirect\r\nLocation: http://127.0.0.1:5000/simple_get\r\nAllow: GET, HEAD\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 301 Redirect\r\nLocation: http://127.0.0.1:5000/simple_get\r\nAllow: GET, HEAD\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -43,8 +47,9 @@ class ResponseBuilderTest {
     public void returnsMethodOptions() {
         String method = "OPTIONS";
         String path = "/method_options";
-        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -52,8 +57,9 @@ class ResponseBuilderTest {
     public void returnsMoreMethodOptions() {
         String method = "OPTIONS";
         String path = "/method_options2";
-        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 
@@ -61,17 +67,9 @@ class ResponseBuilderTest {
     public void returns405MethodNotAllowed() {
         String method = "GET";
         String path = "/head_request";
-        String expectedResponse = "HTTP/1.1 405 Method Not Allowed\r\nAllow: HEAD, OPTIONS\r\n";
-        Response response = ResponseBuilder.responseHandler(method, path);
-        assertEquals(expectedResponse, response.print());
-    }
-
-    @Test
-    public void returnsEchoForPost() {
-        String method = "POST";
-        String path = "/echo_body";
-        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nAllow: POST, HEAD\r\n\r\nsome body";
-        Response response = ResponseBuilder.responseHandler(method, path);
+        String expectedResponse = "HTTP/1.1 405 Method Not Allowed\r\nAllow: HEAD, OPTIONS\r\n\r\n";
+        Response response = new Response();
+        response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
     }
 }

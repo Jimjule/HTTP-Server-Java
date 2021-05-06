@@ -2,30 +2,36 @@ import constants.Codes;
 import routes.*;
 
 public class ResponseBuilder {
-    public static Response responseHandler(String method, String path) {
+    public static Response responseHandler(String method, String path, String body, Response response) {
 
         Route route = RouteMatcher.getRoute(path);
-        Response response = new Response();
 
-        if (checkRouteNotFound(path, route, response)) return response;
+        if (checkRouteNotFound(path, route, response, body)) return response;
 
         String responseCode = getResponseCode(method, route);
         response.setParams(responseCode);
+        
         for (String header: route.getHeaders()) {
             response.setHeaders(header);
         }
-        response.setBody(route.getBody());
+        if (path.equals("/echo_body")) {
+            response.setBody(body);
+        } else {
+            response.setBody(route.getBody());
+        }
 
         return response;
     }
 
-    private static boolean checkRouteNotFound(String path, Route route, Response response) {
+    private static boolean checkRouteNotFound(String path, Route route, Response response, String body) {
         if (route == null) {
             response.setParams(Codes._404.getCode());
+            response.setBody("");
             return true;
         }
         if (path.equals("/redirect")) {
             response.setParams(Codes._301.getCode());
+            response.setBody("");
             for (String header: route.getHeaders()) {
                 response.setHeaders(header);
             }
