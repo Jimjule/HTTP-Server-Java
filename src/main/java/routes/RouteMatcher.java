@@ -14,6 +14,9 @@ public class RouteMatcher {
                 case "/health_check.html":
                     route = new HealthCheckRoute();
                     break;
+                case "/html_response":
+                    route = new HTMLResponse();
+                    break;
                 case "/method_options":
                     route = new MethodOptionsRoute();
                     break;
