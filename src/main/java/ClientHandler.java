@@ -5,7 +5,7 @@ public class ClientHandler extends Thread {
     private Socket clientSocket;
     private InputStream in;
     private PrintWriter out;
-    StringBuilder stringBuilder = new StringBuilder();
+    private String request;
 
     public ClientHandler(Socket socket) {
         this.clientSocket = socket;
@@ -13,17 +13,22 @@ public class ClientHandler extends Thread {
 
     public void run() {
         try {
-            out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
             in = clientSocket.getInputStream();
+            out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
+            request = getRequest();
 
-            String request = getRequest();
             String parameters = RequestReader.requestHandler(request);
             String parametersMethod = RequestReader.findRequestMethod(parameters);
             String parametersPath = RequestReader.findRequestAddress(parameters);
+
             String body = RequestReader.getBody(request);
 
-            Response response = ResponseBuilder.responseHandler(parametersMethod, parametersPath, body);
-            out.println(response.print());
+            Response response = new Response();
+
+            ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
+
+            System.out.println(response.print());
+            out.printf(response.print());
 
             clientSocket.close();
         } catch (IOException e) {
@@ -32,10 +37,14 @@ public class ClientHandler extends Thread {
     }
 
     private String getRequest() throws IOException {
-        while (in.available() != 0) {
-            stringBuilder.append((char) in.read());
+        int readIn;
+        StringBuilder input = new StringBuilder();
+        while ((readIn = in.read()) != -1 && in.available() != 0) {
+            input.append((char) readIn);
         }
+        input.append((char) readIn);
 
-        return stringBuilder.toString();
+        return input.toString();
     }
 }
+

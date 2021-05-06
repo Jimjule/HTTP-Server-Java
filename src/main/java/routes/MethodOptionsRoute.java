@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MethodOptionsRoute implements Route {
     private static final String body = null;
-    private static final ArrayList<String> headers = new ArrayList<>();
+    private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD", "OPTIONS");
 
     public String getBody() {

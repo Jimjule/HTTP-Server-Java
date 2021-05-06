@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EchoBody implements Route {
     private static String body = null;
-    private static final ArrayList<String> headers = new ArrayList<>();
+    private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("POST", "HEAD");
 
     public String getBody() {

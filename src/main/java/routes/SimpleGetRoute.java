@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SimpleGetRoute implements Route {
     private static final String body = null;
-    private static final ArrayList<String> headers = new ArrayList<>();
+    private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
     public String getBody() {
