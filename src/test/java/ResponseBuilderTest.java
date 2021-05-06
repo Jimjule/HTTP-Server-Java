@@ -17,7 +17,7 @@ class ResponseBuilderTest {
     public void returnsOKWithBody() {
         String method = "GET";
         String path = "/simple_get_with_body";
-        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nAllow: GET, HEAD\r\n\r\nHello world";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain;charset=utf-8\r\nAllow: GET, HEAD\r\n\r\nHello world";
         Response response = new Response();
         response = ResponseBuilder.responseHandler(method, path, null, response);
         assertEquals(expectedResponse, response.print());
