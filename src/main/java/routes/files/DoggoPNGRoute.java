@@ -1,13 +1,14 @@
-package routes;
+package routes.files;
 
 import constants.Headers;
+import routes.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HTMLResponse implements Route {
-    private static final String body = "<html><body><p>HTML Response</p></body></html>";
+public class DoggoPNGRoute implements Route {
+    private static String body = null;
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
@@ -15,9 +16,13 @@ public class HTMLResponse implements Route {
         return body;
     }
 
+    public void setBody(String newBody) {
+        body = newBody;
+    }
+
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_HTML.getHeader());
+        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
         headers.add(formatAllow());
         return headers;
     }
