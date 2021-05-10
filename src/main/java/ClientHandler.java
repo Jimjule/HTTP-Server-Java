@@ -25,9 +25,11 @@ public class ClientHandler extends Thread {
 
             Response response = new Response();
 
-            ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
+            if (!parametersPath.equals("/kitteh.jpg")) {
+                ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            out.printf(response.print());
+                out.printf(response.print());
+            }
 
             clientSocket.close();
         } catch (IOException e) {
