@@ -1,6 +1,8 @@
 import constants.Codes;
 import routes.*;
+import routes.files.DoggoPNGRoute;
 import routes.files.HealthCheckHTMLRoute;
+import routes.files.KittehJPGRoute;
 
 public class ResponseBuilder {
     public static Response responseHandler(String method, String path, String body, Response response) {
@@ -20,6 +22,12 @@ public class ResponseBuilder {
         } else if (path.equals("/health-check.html")) {
             HealthCheckHTMLRoute healthCheckHTMLRoute = new HealthCheckHTMLRoute();
             response.setFile(healthCheckHTMLRoute.getFile());
+        } else if (path.equals("/doggo.png")) {
+            DoggoPNGRoute doggoPNGRoute = new DoggoPNGRoute();
+            response.setFile(doggoPNGRoute.getFile());
+        } else if (path.equals("/kitteh.jpg")) {
+            KittehJPGRoute kittehJPGRoute = new KittehJPGRoute();
+            response.setFile(kittehJPGRoute.getFile());
         } else {
             response.setBody(route.getBody());
         }

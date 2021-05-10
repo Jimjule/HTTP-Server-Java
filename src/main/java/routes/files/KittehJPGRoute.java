@@ -3,6 +3,10 @@ package routes.files;
 import constants.Headers;
 import routes.Route;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +22,20 @@ public class KittehJPGRoute implements Route {
 
     public void setBody(String newBody) {
         body = newBody;
+    }
+
+    public byte[] getFile() {
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/src/main/resources/kitteh.jpg";
+
+        byte[] fileBytes = new byte[0];
+        try {
+            fileBytes = Files.readAllBytes(Paths.get(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileBytes;
     }
 
     @Override

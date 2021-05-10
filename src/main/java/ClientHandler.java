@@ -27,10 +27,17 @@ public class ClientHandler extends Thread {
 
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            if (!parametersPath.equals("/health-check.html")) {
-                out.printf(response.print());
-            } else {
+            if (parametersPath.equals("/health-check.html")) {
+                System.out.println(response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile()));
                 out.printf(response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile()));
+            } else if (parametersPath.equals("/doggo.png")) {
+                System.out.println(response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile()));
+                out.printf(response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile()));
+            } else if (parametersPath.equals("/kitteh.jpg")) {
+                System.out.println(response.getParams() + response.getHeaders() + "\r\n" + response.getFile());
+                out.printf(response.getParams() + response.getHeaders() + "\r\n" + response.getFile());
+            } else {
+                out.printf(response.print());
             }
 
             clientSocket.close();
