@@ -3,6 +3,7 @@ public class Response {
     private String params;
     private String headers = "";
     private String body = "";
+    private byte[] file;
 
     private String CRLF = "\r\n";
     private String HTTP_VERSION = "HTTP/1.1 ";
@@ -26,7 +27,23 @@ public class Response {
         }
     }
 
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
     public String print() {
         return this.params + this.headers + this.body;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public String getHeaders() {
+        return headers;
+    }
+
+    public byte[] getFile() {
+        return file;
     }
 }

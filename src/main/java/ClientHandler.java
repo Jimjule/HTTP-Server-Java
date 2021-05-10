@@ -27,7 +27,11 @@ public class ClientHandler extends Thread {
 
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            out.printf(response.print());
+            if (!parametersPath.equals("/health-check.html")) {
+                out.printf(response.print());
+            } else {
+                out.printf(response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile()));
+            }
 
             clientSocket.close();
         } catch (IOException e) {

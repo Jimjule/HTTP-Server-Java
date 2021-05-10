@@ -3,6 +3,9 @@ package routes.files;
 import constants.Headers;
 import routes.Route;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +20,21 @@ public class HealthCheckHTMLRoute implements Route {
     }
 
     public void setBody(String newBody) {
-        File file = new File("/src/main/java/resources/health-check.html");
         body = newBody;
+    }
+
+    public byte[] getFile() {
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/src/main/resources/health-check.html";
+
+        byte[] fileBytes = new byte[0];
+        try {
+            fileBytes = Files.readAllBytes(Paths.get(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileBytes;
     }
 
     @Override
