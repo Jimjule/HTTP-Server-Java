@@ -17,12 +17,13 @@ public class HealthCheckHTMLRoute implements Route {
     }
 
     public void setBody(String newBody) {
+        File file = new File("/src/main/java/resources/health-check.html");
         body = newBody;
     }
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
+        headers.add(Headers.CONTENT_TYPE_HTML.getHeader());
         headers.add(formatAllow());
         return headers;
     }

@@ -22,7 +22,7 @@ public class KittehJPGRoute implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
+        headers.add(Headers.CONTENT_TYPE_JPEG.getHeader());
         headers.add(formatAllow());
         return headers;
     }

@@ -22,7 +22,7 @@ public class DoggoPNGRoute implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
+        headers.add(Headers.CONTENT_TYPE_PNG.getHeader());
         headers.add(formatAllow());
         return headers;
     }

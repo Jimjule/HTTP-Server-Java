@@ -22,7 +22,7 @@ public class KissesGIFRoute implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_TEXT.getHeader());
+        headers.add(Headers.CONTENT_TYPE_GIF.getHeader());
         headers.add(formatAllow());
         return headers;
     }
