@@ -2,6 +2,7 @@ import constants.Codes;
 import routes.*;
 import routes.files.DoggoPNGRoute;
 import routes.files.HealthCheckHTMLRoute;
+import routes.files.KissesGIFRoute;
 import routes.files.KittehJPGRoute;
 
 public class ResponseBuilder {
@@ -28,6 +29,9 @@ public class ResponseBuilder {
         } else if (path.equals("/kitteh.jpg")) {
             KittehJPGRoute kittehJPGRoute = new KittehJPGRoute();
             response.setFile(kittehJPGRoute.getFile());
+        } else if (path.equals("/kisses.gif")) {
+            KissesGIFRoute kissesGIFRoute = new KissesGIFRoute();
+            response.setFile(kissesGIFRoute.getFile());
         } else {
             response.setBody(route.getBody());
         }
