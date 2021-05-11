@@ -29,10 +29,6 @@ public class MethodOptionsRoute implements Route {
     }
 
     @Override
-    public void getContentType() {
-    }
-
-    @Override
     public List<String> getAllow() {
         return allow;
     }

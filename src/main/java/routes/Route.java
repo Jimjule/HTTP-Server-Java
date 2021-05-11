@@ -9,7 +9,5 @@ public interface Route {
 
     String formatAllow();
 
-    void getContentType();
-
     List<String> getAllow();
 }

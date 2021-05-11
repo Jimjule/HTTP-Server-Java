@@ -33,9 +33,4 @@ public class HeadRequest implements Route {
     public List<String> getAllow() {
         return allow;
     }
-
-    @Override
-    public void getContentType() {
-
-    }
 }
