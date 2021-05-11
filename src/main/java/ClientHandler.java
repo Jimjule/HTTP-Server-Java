@@ -28,16 +28,7 @@ public class ClientHandler extends Thread {
 
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            if (parametersPath.equals("/health-check.html")) {
-                out.write((response.getParams() + response.getHeaders() + "\r\n" + new String(response.getFile())).getBytes(StandardCharsets.UTF_8));
-            } else if (parametersPath.equals("/doggo.png")) {
-                out.write((response.getParams() + response.getHeaders() + "\r\n").getBytes(StandardCharsets.UTF_8));
-                out.write(response.getFile());
-
-            } else if (parametersPath.equals("/kitteh.jpg")) {
-                out.write((response.getParams() + response.getHeaders() + "\r\n").getBytes(StandardCharsets.UTF_8));
-                out.write(response.getFile());
-            } else if (parametersPath.equals("/kisses.gif")) {
+            if (parametersPath.equals("/health-check.html") || parametersPath.equals("/doggo.png") || parametersPath.equals("/kitteh.jpg") || parametersPath.equals("/kisses.gif")) {
                 out.write((response.getParams() + response.getHeaders() + "\r\n").getBytes(StandardCharsets.UTF_8));
                 out.write(response.getFile());
             } else {
