@@ -3,7 +3,7 @@ public class Response {
     private String params;
     private String headers = "";
     private String body = "";
-    private byte[] file;
+    private byte[] file = new byte[0];
 
     private String CRLF = "\r\n";
     private String HTTP_VERSION = "HTTP/1.1 ";

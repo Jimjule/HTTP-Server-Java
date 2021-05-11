@@ -27,13 +27,10 @@ public class ClientHandler extends Thread {
 
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
-            if (parametersPath.equals("/health-check.html") || parametersPath.equals("/doggo.png") || parametersPath.equals("/kitteh.jpg") || parametersPath.equals("/kisses.gif")) {
-                out.write(response.printHeaders());
-                out.write(response.printFile());
-            } else {
-                out.write(response.printHeaders());
-                out.write(response.printBody());
-            }
+            out.write(response.printHeaders());
+            out.write(response.printBody());
+            out.write(response.printFile());
+
             out.writeTo(clientSocket.getOutputStream());
             out.flush();
             clientSocket.close();
