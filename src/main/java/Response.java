@@ -29,8 +29,12 @@ public class Response {
         this.file = file;
     }
 
-    public String print() {
+    public String getStringResponse() {
         return this.params + this.headers + CRLF + this.body;
+    }
+
+    public byte[] printHeaders() {
+        return (this.params + this.headers + CRLF).getBytes();
     }
 
     public String getParams() {
@@ -43,5 +47,9 @@ public class Response {
 
     public byte[] getFile() {
         return file;
+    }
+
+    public byte[] getBody() {
+        return body.getBytes();
     }
 }

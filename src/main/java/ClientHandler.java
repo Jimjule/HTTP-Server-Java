@@ -32,7 +32,8 @@ public class ClientHandler extends Thread {
                 out.write((response.getParams() + response.getHeaders() + "\r\n").getBytes(StandardCharsets.UTF_8));
                 out.write(response.getFile());
             } else {
-                out.write(response.print().getBytes(StandardCharsets.UTF_8));
+                out.write(response.printHeaders());
+                out.write(response.getBody());
             }
             out.writeTo(clientSocket.getOutputStream());
             out.flush();
