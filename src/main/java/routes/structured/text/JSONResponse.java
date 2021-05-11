@@ -1,7 +1,7 @@
 package routes.structured.text;
 
 import constants.Headers;
-import routes.Route;
+import lib.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
