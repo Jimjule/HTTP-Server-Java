@@ -16,6 +16,7 @@ public class KittehJPGRoute implements Route {
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
+    @Override
     public String getBody() {
         return body;
     }

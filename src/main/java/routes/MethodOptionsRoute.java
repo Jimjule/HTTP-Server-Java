@@ -11,6 +11,7 @@ public class MethodOptionsRoute implements Route {
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD", "OPTIONS");
 
+    @Override
     public String getBody() {
         return body;
     }

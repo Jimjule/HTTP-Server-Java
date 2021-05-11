@@ -11,6 +11,7 @@ public class EchoBody implements Route {
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("POST", "HEAD");
 
+    @Override
     public String getBody() {
         return body;
     }

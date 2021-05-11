@@ -13,6 +13,7 @@ public class RedirectRoute implements Route {
 
     private static final String redirect = "http://127.0.0.1:5000/simple_get";
 
+    @Override
     public String getBody() {
         return body;
     }
