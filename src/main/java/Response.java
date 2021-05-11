@@ -21,9 +21,7 @@ public class Response {
 
     public void setBody(String body) {
         if (body != null) {
-            this.body += CRLF + body;
-        } else {
-            this.body += CRLF;
+            this.body += body;
         }
     }
 
@@ -32,7 +30,7 @@ public class Response {
     }
 
     public String print() {
-        return this.params + this.headers + this.body;
+        return this.params + this.headers + CRLF + this.body;
     }
 
     public String getParams() {
