@@ -1,13 +1,18 @@
-package routes;
+package routes.files;
 
 import constants.Headers;
+import routes.Route;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HTMLResponse implements Route {
-    private static final String body = "<html><body><p>HTML Response</p></body></html>";
+public class KissesGIFRoute implements Route {
+    private static String body = null;
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
@@ -15,9 +20,27 @@ public class HTMLResponse implements Route {
         return body;
     }
 
+    public void setBody(String newBody) {
+        body = newBody;
+    }
+
+    public byte[] getFile() {
+        String filePath = new File("").getAbsolutePath();
+        filePath += "/src/main/resources/kisses.gif";
+
+        byte[] fileBytes = new byte[0];
+        try {
+            fileBytes = Files.readAllBytes(Paths.get(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return fileBytes;
+    }
+
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_HTML.getHeader());
+        headers.add(Headers.CONTENT_TYPE_GIF.getHeader());
         headers.add(formatAllow());
         return headers;
     }

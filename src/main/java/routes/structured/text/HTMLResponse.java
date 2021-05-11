@@ -1,13 +1,14 @@
-package routes;
+package routes.structured.text;
 
 import constants.Headers;
+import routes.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class JSONResponse implements Route {
-    private static final String body = "{\"key1\":\"value1\",\"key2\":\"value2\"}";
+public class HTMLResponse implements Route {
+    private static final String body = "<html><body><p>HTML Response</p></body></html>";
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
@@ -17,7 +18,7 @@ public class JSONResponse implements Route {
 
     @Override
     public ArrayList<String> getHeaders() {
-        headers.add(Headers.CONTENT_TYPE_JSON.getHeader());
+        headers.add(Headers.CONTENT_TYPE_HTML.getHeader());
         headers.add(formatAllow());
         return headers;
     }
