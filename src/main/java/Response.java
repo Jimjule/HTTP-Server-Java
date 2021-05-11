@@ -37,19 +37,15 @@ public class Response {
         return (this.params + this.headers + CRLF).getBytes();
     }
 
-    public String getParams() {
-        return params;
-    }
-
     public String getHeaders() {
         return headers;
     }
 
-    public byte[] getFile() {
-        return file;
+    public byte[] printBody() {
+        return body.getBytes();
     }
 
-    public byte[] getBody() {
-        return body.getBytes();
+    public byte[] printFile() {
+        return file;
     }
 }

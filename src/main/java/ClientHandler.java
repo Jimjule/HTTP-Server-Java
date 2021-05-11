@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
@@ -29,11 +28,11 @@ public class ClientHandler extends Thread {
             ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
 
             if (parametersPath.equals("/health-check.html") || parametersPath.equals("/doggo.png") || parametersPath.equals("/kitteh.jpg") || parametersPath.equals("/kisses.gif")) {
-                out.write((response.getParams() + response.getHeaders() + "\r\n").getBytes(StandardCharsets.UTF_8));
-                out.write(response.getFile());
+                out.write(response.printHeaders());
+                out.write(response.printFile());
             } else {
                 out.write(response.printHeaders());
-                out.write(response.getBody());
+                out.write(response.printBody());
             }
             out.writeTo(clientSocket.getOutputStream());
             out.flush();
