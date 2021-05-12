@@ -18,7 +18,7 @@ public class ResponseBuilder {
         response.setParams(responseCode);
 
         for (String header : route.getHeaders()) {
-            response.setHeaders(header);
+            response.addHeader(header);
         }
         if (path.equals("/echo_body")) {
             response.setBody(body);
@@ -51,7 +51,7 @@ public class ResponseBuilder {
             response.setParams(Codes._301.getCode());
             response.setBody("");
             for (String header: route.getHeaders()) {
-                response.setHeaders(header);
+                response.addHeader(header);
             }
             return true;
         }
