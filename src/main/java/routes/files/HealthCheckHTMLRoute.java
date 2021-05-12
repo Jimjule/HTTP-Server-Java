@@ -1,7 +1,7 @@
 package routes.files;
 
-import lib.constants.Headers;
-import lib.Route;
+import constants.Headers;
+import route.Route;
 
 import java.io.*;
 import java.nio.file.Files;
