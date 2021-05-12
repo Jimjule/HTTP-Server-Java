@@ -13,6 +13,10 @@ An implementation of an HTTP server made without libraries like HTTP.
  - For test coverage report, run `./gradlew jacocoTestReport`
  - Results are found in `/build/reports/jacoco/test/html/index.html`, and can be read in browser
  
+## Assembling
+
+`./gradlew assemble`
+ 
 ## Compiling
  
  `./gradlew build`
