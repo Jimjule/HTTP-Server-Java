@@ -1,4 +1,4 @@
-package constants;
+package lib.constants;
 
 public enum Codes {
     _200("200 OK"),

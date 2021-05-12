@@ -1,4 +1,6 @@
-import constants.Codes;
+import lib.constants.Codes;
+import lib.Response;
+import lib.Route;
 import routes.*;
 import routes.files.DoggoPNGRoute;
 import routes.files.HealthCheckHTMLRoute;
@@ -10,13 +12,13 @@ public class ResponseBuilder {
 
         Route route = RouteMatcher.getRoute(path);
 
-        if (checkRouteNotFound(path, route, response, body)) return response;
+        if (checkRouteNotFound(path, route, response)) return response;
 
         String responseCode = getResponseCode(method, route);
         response.setParams(responseCode);
 
         for (String header : route.getHeaders()) {
-            response.setHeaders(header);
+            response.addHeader(header);
         }
         if (path.equals("/echo_body")) {
             response.setBody(body);
@@ -39,7 +41,7 @@ public class ResponseBuilder {
         return response;
     }
 
-    private static boolean checkRouteNotFound(String path, Route route, Response response, String body) {
+    private static boolean checkRouteNotFound(String path, Route route, Response response) {
         if (route == null) {
             response.setParams(Codes._404.getCode());
             response.setBody("");
@@ -49,7 +51,7 @@ public class ResponseBuilder {
             response.setParams(Codes._301.getCode());
             response.setBody("");
             for (String header: route.getHeaders()) {
-                response.setHeaders(header);
+                response.addHeader(header);
             }
             return true;
         }

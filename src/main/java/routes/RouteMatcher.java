@@ -1,5 +1,6 @@
 package routes;
 
+import lib.Route;
 import routes.files.DoggoPNGRoute;
 import routes.files.HealthCheckHTMLRoute;
 import routes.files.KissesGIFRoute;

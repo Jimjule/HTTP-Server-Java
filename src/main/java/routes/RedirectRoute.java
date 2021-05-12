@@ -1,6 +1,7 @@
 package routes;
 
-import constants.Headers;
+import lib.constants.Headers;
+import lib.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class RedirectRoute implements Route {
 
     private static final String redirect = "http://127.0.0.1:5000/simple_get";
 
+    @Override
     public String getBody() {
         return body;
     }
@@ -29,10 +31,6 @@ public class RedirectRoute implements Route {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
-    }
-
-    @Override
-    public void getContentType() {
     }
 
     @Override

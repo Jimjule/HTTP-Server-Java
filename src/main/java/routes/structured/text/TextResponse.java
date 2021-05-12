@@ -1,7 +1,7 @@
 package routes.structured.text;
 
-import constants.Headers;
-import routes.Route;
+import lib.constants.Headers;
+import lib.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,6 +12,7 @@ public class TextResponse implements Route {
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
+    @Override
     public String getBody() {
         return body;
     }
@@ -28,10 +29,6 @@ public class TextResponse implements Route {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
-    }
-
-    @Override
-    public void getContentType() {
     }
 
     @Override

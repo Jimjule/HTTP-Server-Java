@@ -1,4 +1,4 @@
-package routes;
+package lib;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +8,6 @@ public interface Route {
     ArrayList<String> getHeaders();
 
     String formatAllow();
-
-    void getContentType();
 
     List<String> getAllow();
 }

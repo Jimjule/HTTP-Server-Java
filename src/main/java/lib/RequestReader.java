@@ -1,3 +1,5 @@
+package lib;
+
 public class RequestReader {
     public static String requestHandler(String request) {
         return request.split("\r\n")[0];

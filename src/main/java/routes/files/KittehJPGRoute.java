@@ -1,7 +1,7 @@
 package routes.files;
 
-import constants.Headers;
-import routes.Route;
+import lib.constants.Headers;
+import lib.Route;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,7 @@ public class KittehJPGRoute implements Route {
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
+    @Override
     public String getBody() {
         return body;
     }
@@ -50,10 +51,6 @@ public class KittehJPGRoute implements Route {
         String allowHeader = Headers.ALLOW.getHeader();
         allowHeader += String.join(", ", allow);
         return allowHeader;
-    }
-
-    @Override
-    public void getContentType() {
     }
 
     @Override

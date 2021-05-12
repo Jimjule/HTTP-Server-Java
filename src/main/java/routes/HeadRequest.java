@@ -1,6 +1,7 @@
 package routes;
 
-import constants.Headers;
+import lib.constants.Headers;
+import lib.Route;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,10 +33,5 @@ public class HeadRequest implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
-    }
-
-    @Override
-    public void getContentType() {
-
     }
 }
