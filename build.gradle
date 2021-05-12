@@ -10,9 +10,9 @@ sourceCompatibility = 1.8
 apply plugin: "jacoco"
 
 repositories {
-    flatDir {
-        dirs 'libs'
-    }
+//    flatDir {
+//        dirs 'libs'
+//    }
     mavenCentral()
 }
 
@@ -21,7 +21,7 @@ dependencies {
 
     // Dependency on local binaries
     runtime files("libs/HTTP-Library-Java-1.0-SNAPSHOT.jar")
-    implementation files("libs/HTTP-Library-Java-1.0-SNAPSHOT.jar")
+    compile files('libs/HTTP-Library-Java-1.0-SNAPSHOT.jar')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
