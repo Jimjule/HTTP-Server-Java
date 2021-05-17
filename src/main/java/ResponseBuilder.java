@@ -2,7 +2,7 @@ import HTTPServer.constants.Codes;
 
 import routes.*;
 
-import HTTPServer.route.Route;
+import HTTPServer.Route;
 import HTTPServer.Response;
 
 public class ResponseBuilder {
@@ -19,14 +19,16 @@ public class ResponseBuilder {
             response.addHeader(header);
         }
 
-        route.performRequest(method, response, body);
+        route.performRequest(method, response, body, path);
+        if (!route.getRouteIsFound()) {
+           setRouteNotFound(response);
+        }
         return response;
     }
 
     private static boolean checkRouteNotFound(String path, Route route, Response response) {
         if (route == null) {
-            response.setParams(Codes._404.getCode());
-            response.setBody("");
+            setRouteNotFound(response);
             return true;
         }
         if (path.equals("/redirect")) {
@@ -38,6 +40,11 @@ public class ResponseBuilder {
             return true;
         }
         return false;
+    }
+
+    private static void setRouteNotFound(Response response) {
+        response.setParams(Codes._404.getCode());
+        response.setBody("");
     }
 
     private static String getResponseCode(String method, Route route) {

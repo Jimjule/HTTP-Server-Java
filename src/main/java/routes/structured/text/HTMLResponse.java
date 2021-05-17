@@ -1,9 +1,8 @@
 package routes.structured.text;
 
 import HTTPServer.Response;
-import HTTPServer.constants.Headers;
-import HTTPServer.route.Route;
-
+import HTTPServer.Headers;
+import HTTPServer.Route;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +37,12 @@ public class HTMLResponse implements Route {
     }
 
     @Override
-    public void performRequest(String method, Response response, String body) {
+    public void performRequest(String method, Response response, String body, String path) {
         response.setBody(this.getBody());
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }

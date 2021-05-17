@@ -1,9 +1,8 @@
 package routes;
 
 import HTTPServer.Response;
-import HTTPServer.constants.Headers;
-import HTTPServer.route.Route;
-
+import HTTPServer.Headers;
+import HTTPServer.Route;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,9 +41,14 @@ public class EchoBody implements Route {
     }
 
     @Override
-    public void performRequest(String method, Response response, String body) {
+    public void performRequest(String method, Response response, String body, String path) {
         if (method.equals("POST")) {
             response.setBody(body);
         }
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }

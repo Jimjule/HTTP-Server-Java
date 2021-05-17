@@ -1,9 +1,8 @@
 package routes.files;
 
 import HTTPServer.Response;
-import HTTPServer.constants.Headers;
-import HTTPServer.route.Route;
-
+import HTTPServer.Headers;
+import HTTPServer.Route;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -59,9 +58,14 @@ public class HealthCheckHTMLRoute implements Route {
     }
 
     @Override
-    public void performRequest(String method, Response response, String body) {
+    public void performRequest(String method, Response response, String body, String path) {
         if (method.equals("GET")) {
             response.setFile(this.getFile());
         }
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }
