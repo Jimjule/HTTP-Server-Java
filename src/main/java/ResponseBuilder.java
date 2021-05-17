@@ -1,10 +1,6 @@
 import HTTPServer.constants.Codes;
 
 import routes.*;
-import routes.files.DoggoPNGRoute;
-import routes.files.HealthCheckHTMLRoute;
-import routes.files.KissesGIFRoute;
-import routes.files.KittehJPGRoute;
 
 import HTTPServer.route.Route;
 import HTTPServer.Response;
@@ -22,24 +18,8 @@ public class ResponseBuilder {
         for (String header : route.getHeaders()) {
             response.addHeader(header);
         }
-        if (path.equals("/echo_body")) {
-            response.setBody(body);
-        } else if (path.equals("/health-check.html")) {
-            HealthCheckHTMLRoute healthCheckHTMLRoute = new HealthCheckHTMLRoute();
-            response.setFile(healthCheckHTMLRoute.getFile());
-        } else if (path.equals("/doggo.png")) {
-            DoggoPNGRoute doggoPNGRoute = new DoggoPNGRoute();
-            response.setFile(doggoPNGRoute.getFile());
-        } else if (path.equals("/kitteh.jpg")) {
-            KittehJPGRoute kittehJPGRoute = new KittehJPGRoute();
-            response.setFile(kittehJPGRoute.getFile());
-        } else if (path.equals("/kisses.gif")) {
-            KissesGIFRoute kissesGIFRoute = new KissesGIFRoute();
-            response.setFile(kissesGIFRoute.getFile());
-        } else {
-            response.setBody(route.getBody());
-        }
 
+        route.performRequest(method, response, body);
         return response;
     }
 

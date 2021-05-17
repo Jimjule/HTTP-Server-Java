@@ -1,5 +1,6 @@
 package routes;
 
+import HTTPServer.Response;
 import HTTPServer.constants.Headers;
 import HTTPServer.route.Route;
 
@@ -33,5 +34,12 @@ public class SimpleGetRoute implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body) {
+        if (method.equals("GET")) {
+            response.setBody(this.getBody());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package routes.structured.text;
 
+import HTTPServer.Response;
 import HTTPServer.constants.Headers;
 import HTTPServer.route.Route;
 
@@ -34,5 +35,10 @@ public class HTMLResponse implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body) {
+        response.setBody(this.getBody());
     }
 }

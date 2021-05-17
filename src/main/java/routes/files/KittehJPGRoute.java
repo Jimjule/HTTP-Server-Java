@@ -1,5 +1,6 @@
 package routes.files;
 
+import HTTPServer.Response;
 import HTTPServer.constants.Headers;
 import HTTPServer.route.Route;
 
@@ -56,5 +57,12 @@ public class KittehJPGRoute implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body) {
+        if (method.equals("GET")) {
+            response.setFile(this.getFile());
+        }
     }
 }
