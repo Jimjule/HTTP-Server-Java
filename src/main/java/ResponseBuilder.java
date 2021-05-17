@@ -1,4 +1,4 @@
-import constants.Codes;
+import HTTPServer.constants.Codes;
 
 import routes.*;
 import routes.files.DoggoPNGRoute;
@@ -6,7 +6,8 @@ import routes.files.HealthCheckHTMLRoute;
 import routes.files.KissesGIFRoute;
 import routes.files.KittehJPGRoute;
 
-import route.Route;
+import HTTPServer.route.Route;
+import HTTPServer.Response;
 
 public class ResponseBuilder {
     public static Response responseHandler(String method, String path, String body, Response response) {
