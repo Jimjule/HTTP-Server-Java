@@ -1,5 +1,6 @@
 package routes;
 
+import HTTPServer.Codes;
 import HTTPServer.Response;
 import HTTPServer.Headers;
 import HTTPServer.Route;
@@ -8,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RedirectRoute implements Route {
-    private static final String body = null;
+    private static final String body = "";
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
@@ -40,7 +41,7 @@ public class RedirectRoute implements Route {
 
     @Override
     public void performRequest(String method, Response response, String body, String path) {
-        response.setBody(this.getBody());
+        response.setParams(Codes._301.getCode());
     }
 
     @Override
