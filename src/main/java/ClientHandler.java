@@ -1,8 +1,7 @@
 import java.io.*;
 import java.net.Socket;
-
-import HTTPServer.Response;
-import HTTPServer.RequestReader;
+import HTTPServer.*;
+import routes.RouteMatcher;
 
 public class ClientHandler extends Thread {
     private Socket clientSocket;
@@ -27,8 +26,9 @@ public class ClientHandler extends Thread {
             String body = RequestReader.getBody(request);
 
             Response response = new Response();
+            Route route = RouteMatcher.getRoute(parametersPath);
 
-            ResponseBuilder.responseHandler(parametersMethod, parametersPath, body, response);
+            ResponseHelper.responseHandler(parametersMethod, parametersPath, body, response, route);
 
             out.write(response.printHeaders());
             out.write(response.printBody());
