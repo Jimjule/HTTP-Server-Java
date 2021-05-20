@@ -1,6 +1,7 @@
 package routes;
 
 import HTTPServer.Route;
+import HTTPServer.Router;
 import routes.files.DoggoPNGRoute;
 import routes.files.HealthCheckHTMLRoute;
 import routes.files.KissesGIFRoute;
@@ -10,8 +11,8 @@ import routes.structured.text.JSONResponse;
 import routes.structured.text.TextResponse;
 import routes.structured.text.XMLResponse;
 
-public class RouteMatcher {
-    public static Route getRoute(String path) {
+public class RouteMatcher implements Router {
+    public Route getRoute(String path) {
         Route route = null;
         try {
             switch (path) {
