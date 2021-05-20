@@ -1,14 +1,15 @@
 package routes;
 
-import constants.Headers;
-import route.Route;
-
+import HTTPServer.Codes;
+import HTTPServer.Response;
+import HTTPServer.Headers;
+import HTTPServer.Route;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class RedirectRoute implements Route {
-    private static final String body = null;
+    private static final String body = "";
     private ArrayList<String> headers = new ArrayList<>();
     private static final List<String> allow = Arrays.asList("GET", "HEAD");
 
@@ -36,5 +37,15 @@ public class RedirectRoute implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body, String path) {
+        response.setParams(Codes._301.getCode());
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }

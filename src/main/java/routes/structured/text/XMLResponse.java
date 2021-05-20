@@ -1,8 +1,8 @@
 package routes.structured.text;
 
-import constants.Headers;
-import route.Route;
-
+import HTTPServer.Response;
+import HTTPServer.Headers;
+import HTTPServer.Route;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,5 +34,15 @@ public class XMLResponse implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body, String path) {
+        response.setBody(this.getBody());
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }

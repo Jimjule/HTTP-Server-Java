@@ -1,7 +1,8 @@
 package routes.files;
 
-import constants.Headers;
-import route.Route;
+import HTTPServer.Response;
+import HTTPServer.Headers;
+import HTTPServer.Route;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,5 +57,17 @@ public class DoggoPNGRoute implements Route {
     @Override
     public List<String> getAllow() {
         return allow;
+    }
+
+    @Override
+    public void performRequest(String method, Response response, String body, String path) {
+        if (method.equals("GET")) {
+            response.setFile(this.getFile());
+        }
+    }
+
+    @Override
+    public boolean getRouteIsFound() {
+        return true;
     }
 }
