@@ -5,13 +5,15 @@ import HTTPServer.*;
 import routes.RouteMatcher;
 
 class ResponseTest {
+    private Router router = new RouteMatcher();
+
     @Test
     public void returnsOKForExistingGETPath() {
         String method = "GET";
         String path = "/simple_get";
         String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -22,7 +24,7 @@ class ResponseTest {
         String path = "/simple_get_with_body";
         String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Type: text/plain;charset=utf-8\r\nAllow: GET, HEAD\r\n\r\nHello world";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -33,7 +35,7 @@ class ResponseTest {
         String path = "/over_the_rainbow";
         String expectedResponse = "HTTP/1.1 404 Not Found\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -44,7 +46,7 @@ class ResponseTest {
         String path = "/redirect";
         String expectedResponse = "HTTP/1.1 301 Redirect\r\nLocation: http://127.0.0.1:5000/simple_get\r\nAllow: GET, HEAD\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -55,7 +57,7 @@ class ResponseTest {
         String path = "/method_options";
         String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -66,7 +68,7 @@ class ResponseTest {
         String path = "/method_options2";
         String expectedResponse = "HTTP/1.1 200 OK\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
@@ -77,7 +79,7 @@ class ResponseTest {
         String path = "/head_request";
         String expectedResponse = "HTTP/1.1 405 Method Not Allowed\r\nAllow: HEAD, OPTIONS\r\n\r\n";
         Response response = new Response();
-        Route route = RouteMatcher.getRoute(path);
+        Route route = router.getRoute(path);
         ResponseHelper.responseHandler(method, path, null, response, route);
         assertEquals(expectedResponse, response.getStringResponse());
     }
